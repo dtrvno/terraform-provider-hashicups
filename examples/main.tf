@@ -1,20 +1,18 @@
 terraform {
   required_providers {
-    hashicups = {
-      version = "0.2"
-      source  = "hashicorp.com/edu/hashicups"
+    orch = {
+      version = "1.0.1"
+      source  = "localhost/supermicro/orch"
     }
   }
 }
 
-provider "hashicups" {}
+provider "orch" {}
 
-module "psl" {
-  source = "./coffee"
-
-  coffee_name = "Packer Spiced Latte"
+module "my_iaas" {
+  source = "./orch"
 }
 
-output "psl" {
-  value = module.psl.coffee
+output "iaas_out" {
+  value = module.my_iaas
 }
