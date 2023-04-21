@@ -37,6 +37,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 terraform
-
+*.hcl
 .vscode/
 .idea/
