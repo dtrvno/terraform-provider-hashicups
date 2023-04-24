@@ -37,4 +37,7 @@ override.tf.json
 terraform.rc
 terraform
 *.hcl
-.terraform
+**/terraform.tfstate
+**/.terraform.lock.hcl
+*.exe
+**/terraform-provider-orch.exe

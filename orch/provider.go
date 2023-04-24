@@ -17,13 +17,17 @@ func Provider() *schema.Provider {
 }
 type IAAS_Input struct {
 	Name   string `json:"name,omitempty"`
+	Password string `json:"password,omitempty"`
 	Type  string `json:"type,omitempty"`
 	Url string `json:"url,omitempty"`
+	User string `json:"user,omitempty"`
 }
 
 type IAAS struct {
 	ID     string `json:"guid_id,omitempty"`
 	Name   string `json:"name,omitempty"`
+	Password string `json:"password,omitempty"`
 	Type  string `json:"type,omitempty"`
 	Url string `json:"url,omitempty"`
+	User string `json:"user,omitempty"`
 }

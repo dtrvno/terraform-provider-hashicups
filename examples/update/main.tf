@@ -17,18 +17,26 @@ provider "orch" {
   variable "iaas_url" {
      description="Url of iaas provider"
   }
+  variable "iaas_update_url" {
+     description="Url of iaas provider"
+  }
+  variable "iaas_type" {
+     description="Url of iaas provider"
+  }
   variable "iaas_guid" {
      description="guild of iaas provider"
   }
   resource "orch_iaas_resource" "my_iaas" {
-  guid_id=var.iaas_guid
-  name=var.iaas_name
-  url=var.iaas_url
+    
+        type=var.iaas_type
+        name=var.iaas_name
+        url=var.iaas_url
+      
  }
  output "my_iaas_output" {
-  value=[orch_iaas_resource.my_iaas.guid_id,orch_iaas_resource.my_iaas.name]
-
+  value=[orch_iaas_resource.my_iaas.guid_id,orch_iaas_resource.my_iaas.url]
 }
+
 
 
 
