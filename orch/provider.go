@@ -9,10 +9,12 @@ func Provider() *schema.Provider {
 	return &schema.Provider{
 		ResourcesMap:   map[string]*schema.Resource{
 			"orch_iaas_resource": resourceIAAS(),
+			"orch_iaas_update_resource": resourceUpdateIAAS(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"orch_datasource":     dataSourceIAAS(),
 		},
+		
 	}
 }
 type IAAS_Input struct {

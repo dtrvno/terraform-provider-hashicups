@@ -16,7 +16,7 @@ func resourceIAAS() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceIAASCreate,
 		ReadContext:   resourceIAASRead,
-		UpdateContext: resourceIAASUpdate,
+		UpdateContext: resourceIAASCreateUpdate,
 		DeleteContext: resourceIAASDelete,
 		Schema: map[string]*schema.Schema{
 			"orch_iaas_resource": &schema.Schema{
@@ -24,73 +24,151 @@ func resourceIAAS() *schema.Resource {
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-							"available_nodes": &schema.Schema{
-								Type:     schema.TypeInt,
-								Computed: true,
-							},
-							"created_date": &schema.Schema{
-								Type:     schema.TypeString,
-								Computed: true,
-							},
-							"guid_id": &schema.Schema{
-								Type:        schema.TypeString,
-								Computed:    true,
-								Description: "the guid_id value returned",
-							},
-							"name": &schema.Schema{
-								Type:        schema.TypeString,
-								Computed:    true,
-								Description: "name of iaas provider",
-							},
-							"password": &schema.Schema{
-								Type:     schema.TypeString,
-								Computed: true,
-							},
-							"type": &schema.Schema{
-								Type:        schema.TypeString,
-								Computed:    true,
-								Description: "type of iaas provider",
-							},
-							"url": &schema.Schema{
-								Type:        schema.TypeString,
-								Computed:    true,
-								Description: "url of iaas provider",
-							},
-							"user": &schema.Schema{
-								Type:     schema.TypeString,
-								Computed: true,
-							},
+						"available_nodes": &schema.Schema{
+							Type:     schema.TypeInt,
+							Computed: true,
+						},
+						"created_date": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"guid_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "the guid_id value returned",
+						},
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "name of iaas provider",
+						},
+						"password": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "type of iaas provider",
+						},
+						"url": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "url of iaas provider",
+						},
+						"user": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
 
 					},
 				},
 			},
-				"guid_id": &schema.Schema{
-					Type:        schema.TypeString,
-					Computed:    true,
-					Description: "the guid_id value",
-				},
-				"name": &schema.Schema{
-					Type:        schema.TypeString,
-					Required:    true,
-					Description: "name of iaas provider",
-				},
-				"type": &schema.Schema{
-					Type:        schema.TypeString,
-					Required:    true,
-					Description: "type of iaas provider",
-				},
-				"url": &schema.Schema{
-					Type:        schema.TypeString,
-					Required:    true,
-					Description: "the url value",
-				},
-					},
+			"guid_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "the guid_id value",
+			},
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "name of iaas provider",
+			},
+			"type": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "type of iaas provider",
+			},
+			"url": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "the url value",
+			},
+		},
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 	}
 }
 
+func resourceUpdateIAAS() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: resourceIAASUpdate,
+		ReadContext:   resourceIAASRead,
+		UpdateContext: resourceIAASUpdate,
+		DeleteContext: resourceIAASDelete,
+		Schema: map[string]*schema.Schema{
+			"orch_iaas_update_resource": &schema.Schema{
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"available_nodes": &schema.Schema{
+							Type:     schema.TypeInt,
+							Computed: true,
+						},
+						"created_date": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"guid_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "the guid_id value returned",
+						},
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "name of iaas provider",
+						},
+						"password": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "type of iaas provider",
+						},
+						"url": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "url of iaas provider",
+						},
+						"user": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+
+					},
+				},
+			},
+			"guid_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "the guid_id value",
+			},
+			"name": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "name of iaas provider",
+			},
+			"type": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "type of iaas provider",
+			},
+			"url": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "the url value",
+			},
+		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+	}
+}
 
 
 func resourceIAASCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
@@ -129,10 +207,12 @@ func resourceIAASCreate(ctx context.Context, d *schema.ResourceData, m interface
 	if err != nil {
 		return diag.FromErr(err)
 	}
+	log.Printf("[DEBUG]: *************before call******")
     resp, err := client.Do(req)
 	if err != nil {
 		return diag.FromErr(err)
 	}
+	log.Printf("[DEBUG]: *************after call******")
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	var iaas_output IAAS
@@ -152,11 +232,14 @@ func resourceIAASCreate(ctx context.Context, d *schema.ResourceData, m interface
 	if err := d.Set("url", iaas_output.Url); err != nil {
 		return diag.FromErr(err)
 	}
-	d.SetId(iaas_output.ID)
+	d.SetId("iaas_resource_"+iaas_output.ID)
 	return diags
 }
 
-
+func resourceIAASCreateUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+	return diags
+}
 
 func resourceIAASRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
@@ -218,24 +301,26 @@ func resourceIAASUpdate(ctx context.Context, d *schema.ResourceData, m interface
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+	log.Printf("[DEBUG] %s: *************update provider after******", string(body))
 	var iaas_output IAAS
 	err = json.Unmarshal(body, &iaas_output)
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	if err := d.Set("guid_id", iaas_output.ID); err != nil {
+	if err := d.Set("guid_id", iaas.ID); err != nil {
 		return diag.FromErr(err)
 	}
-	if err := d.Set("name", iaas_output.Name); err != nil {
+	if err := d.Set("name", iaas.Name); err != nil {
 		return diag.FromErr(err)
 	}
-	if err := d.Set("type", iaas_output.Type); err != nil {
+	if err := d.Set("type", iaas.Type); err != nil {
 		return diag.FromErr(err)
 	}
-	if err := d.Set("url", iaas_output.Url); err != nil {
+	if err := d.Set("url", iaas.Url); err != nil {
 		return diag.FromErr(err)
 	}
-	d.SetId(iaas_output.ID)
+	d.SetId("iaas_resource_update_"+iaas.ID)
+	log.Printf("[DEBUG] %s: *************update provider before exit******", string(body))
 	return diags
 }
 func resourceIAASDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {

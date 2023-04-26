@@ -1,5 +1,5 @@
 iaas_guid="8bca8309-db8c-4165-ab04-c8c1077fc1e6"
 iaas_name="new_name"
-iaas_url="new_url"
+iaas_url="new_url_update"
 iaas_update_url="updated url"
 iaas_type="foreman"
