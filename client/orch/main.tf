@@ -9,11 +9,11 @@ terraform {
 
 
 
-data "orch_datasource" "all" {}
+data "orch_iaas_provider_datasource" "all" {}
 
 # Returns all iaas
 output "all_iaas" {
-  value = data.orch_datasource.all.iaas
+  value = data.orch_iaas_provider_datasource.all.iaas_providers
 }
 
 

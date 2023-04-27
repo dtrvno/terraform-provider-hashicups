@@ -8,11 +8,11 @@ import (
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		ResourcesMap:   map[string]*schema.Resource{
-			"orch_iaas_resource": resourceIAAS(),
-			"orch_iaas_update_resource": resourceUpdateIAAS(),
+			"orch_iaas_provider_resource": resourceIAAS(),
+			"orch_iaas_provider_update_resource": resourceUpdateIAAS(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"orch_datasource":     dataSourceIAAS(),
+			"orch_iaas_provider_datasource":     dataSourceIAAS(),
 		},
 		
 	}

@@ -26,17 +26,17 @@ provider "orch" {
   variable "iaas_guid" {
      description="guild of iaas provider"
   }
-  resource "orch_iaas_resource" "my_iaas" {
+  resource "orch_iaas_provider_resource" "my_iaas" {
     
   type=var.iaas_type
   name=var.iaas_name
   url=var.iaas_url
  }
  output "my_iaas_output" {
-  value=[orch_iaas_resource.my_iaas.guid_id,orch_iaas_resource.my_iaas.name]
+  value=[orch_iaas_provider_resource.my_iaas.guid_id,orch_iaas_provider_resource.my_iaas.name]
 }
-resource "orch_iaas_resource" "my_iaas1" {
-  guid_id=orch_iaas_resource.my_iaas.guid_id
+resource "orch_iaas_update_resource" "my_iaas1" {
+  guid_id=orch_iaas_provider_resource.my_iaas.guid_id
   type=var.iaas_type
   name=var.iaas_name
   url=var.iaas_update_url
@@ -44,7 +44,7 @@ resource "orch_iaas_resource" "my_iaas1" {
 }
 
 output "my_iaas_output1" {
-  value=[orch_iaas_resource.my_iaas1.guid_id,orch_iaas_resource.my_iaas1.url]
+  value=[orch_iaas_provider_update_resource.my_iaas1.guid_id,orch_iaas_provider_update_resource.my_iaas1.url]
 }
 
 

@@ -19,7 +19,7 @@ func resourceIAAS() *schema.Resource {
 		UpdateContext: resourceIAASCreateUpdate,
 		DeleteContext: resourceIAASDelete,
 		Schema: map[string]*schema.Schema{
-			"orch_iaas_resource": &schema.Schema{
+			"orch_iaas_provider_resource": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -98,7 +98,7 @@ func resourceUpdateIAAS() *schema.Resource {
 		UpdateContext: resourceIAASUpdate,
 		DeleteContext: resourceIAASDelete,
 		Schema: map[string]*schema.Schema{
-			"orch_iaas_update_resource": &schema.Schema{
+			"orch_iaas_provider_update_resource": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -173,8 +173,6 @@ func resourceUpdateIAAS() *schema.Resource {
 
 func resourceIAASCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	
-
-	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
     client := &http.Client{Timeout: 10 * time.Second}
 	iaas_name := d.Get("name").(string)
@@ -232,7 +230,7 @@ func resourceIAASCreate(ctx context.Context, d *schema.ResourceData, m interface
 	if err := d.Set("url", iaas_output.Url); err != nil {
 		return diag.FromErr(err)
 	}
-	d.SetId("iaas_resource_"+iaas_output.ID)
+	d.SetId("iaas_provider_resource_"+iaas_output.ID)
 	return diags
 }
 
@@ -319,7 +317,7 @@ func resourceIAASUpdate(ctx context.Context, d *schema.ResourceData, m interface
 	if err := d.Set("url", iaas.Url); err != nil {
 		return diag.FromErr(err)
 	}
-	d.SetId("iaas_resource_update_"+iaas.ID)
+	d.SetId("iaas_provider_resource_update_"+iaas.ID)
 	log.Printf("[DEBUG] %s: *************update provider before exit******", string(body))
 	return diags
 }

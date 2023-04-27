@@ -17,7 +17,7 @@ func dataSourceIAAS() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceIaaSRead,
 		Schema: map[string]*schema.Schema{
-			"iaas": &schema.Schema{
+			"iaas_providers": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -66,7 +66,6 @@ func dataSourceIAAS() *schema.Resource {
 func dataSourceIaaSRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	client := &http.Client{Timeout: 10 * time.Second}
 
-	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1/iaas_providers", "http://localhost:5020"), nil)
@@ -86,7 +85,7 @@ func dataSourceIaaSRead(ctx context.Context, d *schema.ResourceData, m interface
 		return diag.FromErr(err)
 	}
     log.Printf("[DEBUG] %s: *************all providers******", iaas_providers)
-	if err := d.Set("iaas", iaas_providers); err != nil {
+	if err := d.Set("iaas_providers", iaas_providers); err != nil {
 		return diag.FromErr(err)
 	}
 
