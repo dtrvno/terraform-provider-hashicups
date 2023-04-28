@@ -1,4 +1,4 @@
-module terraform-provider-orch
+module terraform-provider-orchestrator
 
 go 1.20
 

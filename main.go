@@ -4,7 +4,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 
-	orch "terraform-provider-orch/orch" 
+	orch "terraform-provider-orchestrator/orch" 
 
 	
 )
